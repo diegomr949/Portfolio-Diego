@@ -1,0 +1,21 @@
+:root {
+    /* PALETA DE COLORES  */
+    --color-bg: #f8f9fa;
+    --color-text: #1a1a1a;
+    --color-text-light: #666666; 
+    --color-accent: #2563eb; 
+    --color-accent-hover: #1d4ed8;
+
+    /* TIPOGRAFÍA */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-code: 'Fira Code', monospace; 
+
+    /*ESPACIADO */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+
+    /* BORDES */
+    --border-radius: 8px;
+}

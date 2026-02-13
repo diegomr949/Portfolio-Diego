@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Diego Moreno Rico - Desarrollador de Software especializado en Backend Java y Frontend Moderno.">
+    <meta name="description"
+        content="Portfolio de Diego Moreno Rico - Desarrollador de Software especializado en Backend Java y Frontend Moderno.">
     <title>Diego Moreno Rico | Software Engineer</title>
-    
+
     <link rel="stylesheet" href="css/style.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <header class="header">
         <nav class="nav container">
             <a href="#" class="nav__logo">Diego<span class="text-accent">.dev</span></a>
-            
+
             <ul class="nav__list">
                 <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="#about" class="nav__link">Sobre mí</a></li>
@@ -44,14 +49,70 @@
             </div>
         </section>
 
-        </main>
+        <section id="projects" class="section container">
+            <div class="section-header">
+                <h2 class="section-title">Proyectos Destacados <span class="text-accent">.</span></h2>
+                <p class="section-subtitle">Backend sólido, Frontend escalable.</p>
+            </div>
 
-    <footer class="footer section">
-        <div class="footer__container container">
-            <p class="footer__copy">&copy; 2026 Diego Moreno Rico. Hecho con código puro.</p>
+            <div class="projects-grid" id="projects-container">
+
+
+            </div>
+        </section>
+        <section id="contact" class="section container">
+            <div class="contact-layout">
+
+                <div class="contact-info">
+                    <h2 class="section-title">Hablemos <span class="text-accent">.</span></h2>
+                    <p class="section-subtitle">¿Tenés una idea o una oferta? Estoy listo.</p>
+
+                    <p class="contact-text">
+                        Actualmente estoy abierto a oportunidades como <strong>Backend</strong> o <strong>Fullstack
+                            Developer</strong>.
+                        Si buscás a alguien que entienda tanto de bases de datos como de pixeles, escribime.
+                    </p>
+
+                    <a href="mailto:tuemail@ejemplo.com" class="email-link">
+                        tuemail@ejemplo.com
+                    </a>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" id="name" class="form-input" placeholder="Juan Pérez">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="juan@empresa.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Mensaje</label>
+                        <textarea id="message" class="form-input form-textarea"
+                            placeholder="Hola Diego, me gustaría..."></textarea>
+                    </div>
+
+                    <button type="submit" class="button button--primary">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Diego Moreno Rico.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+            </div>
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
+
 </html>
