@@ -328,3 +328,95 @@ body {
     color: var(--color-accent);
     text-decoration: underline;
 }
+
+
+
+
+
+
+
+/* --- ESTILOS DEL BOTÓN HAMBURGUESA --- */
+.nav__toggle {
+    display: none; 
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+/* --- MEDIA QUERY --- */
+@media screen and (max-width: 768px) {
+    
+
+    .nav__toggle {
+        display: block; 
+    }
+
+
+    .nav__list {
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        background-color: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(10px);
+        width: 70%; 
+        height: 100vh; 
+        flex-direction: column; 
+        justify-content: center; 
+        box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.4s ease; 
+        z-index: 200;
+        padding: var(--spacing-xl);
+    }
+
+
+    .nav__list.show-menu {
+        right: 0; 
+    }
+    
+  
+    .nav__link {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+/* --- ANIMACIONES DE SCROLL  --- */
+
+.hidden {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: all 0.8s ease-out; 
+    filter: blur(5px); 
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+
+.card:nth-child(2) { transition-delay: 200ms; }
+.card:nth-child(3) { transition-delay: 400ms; }
+.card:nth-child(4) { transition-delay: 600ms; }
+
+
+/* Mensaje de estado del formulario */
+.form-status {
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.form-status.success {
+    color: #10b981; /* Verde éxito */
+    opacity: 1;
+}
+
+.form-status.error {
+    color: #ef4444; /* Rojo error */
+    opacity: 1;
+}

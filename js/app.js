@@ -1,18 +1,40 @@
-// 1. Importamos los datos desde nuestro "módulo"
 import { projects } from './data.js';
 
-// 2. Seleccionamos el contenedor del DOM
+// --- 1. SELECCIÓN DE ELEMENTOS DEL DOM ---
 const projectsContainer = document.getElementById('projects-container');
+const navToggle = document.querySelector('.nav__toggle');
+const navMenu = document.querySelector('#nav-menu');
+const navLinks = document.querySelectorAll('.nav__link');
 
-// 3. Función para generar el HTML de una tarjeta
+// --- 2. CONFIGURACIÓN DE ANIMACIONES (SCROLL REVEAL) ---
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target); // Dejar de observar una vez mostrado
+        }
+    });
+}, observerOptions);
+
+function initScrollAnimations() {
+    // Seleccionamos todo lo que tenga la clase .hidden
+    const elementsToAnimate = document.querySelectorAll('.hidden');
+    elementsToAnimate.forEach((el) => observer.observe(el));
+}
+
+// --- 3. GENERADOR DE TARJETAS (HTML) ---
 function createProjectCard(project) {
-    // Convertimos el array de tecnologías en strings <li>...</li>
-    // .map() transforma cada elemento del array.
-    // .join('') une todo en un solo string de texto.
     const techTags = project.tech.map(tag => `<li>${tag}</li>`).join('');
 
+    // NOTA: Agregamos la clase 'hidden' aquí para que nazcan ocultas
     return `
-        <article class="card">
+        <article class="card hidden">
             <div class="card__header">
                 <div class="folder-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
@@ -37,25 +59,90 @@ function createProjectCard(project) {
     `;
 }
 
-// 4. Función Principal: Renderizar todo
+// --- 4. RENDERIZADO PRINCIPAL ---
 function renderProjects() {
-    // Si el contenedor no existe (por si estamos en otra página), paramos.
     if (!projectsContainer) return;
 
-    // Limpiamos contenido previo (buena práctica)
     projectsContainer.innerHTML = '';
 
-    // Recorremos los datos e inyectamos el HTML
     projects.forEach(project => {
         const cardHTML = createProjectCard(project);
-        // insertAdjacentHTML es más rápido y seguro que innerHTML += ...
         projectsContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
+
+    // IMPORTANTE: Iniciamos la animación DESPUÉS de crear las tarjetas
+    initScrollAnimations();
 }
 
-// 5. Ejecutamos al cargar
-// DOMContentLoaded asegura que el HTML esté listo antes de correr el JS
+// --- 5. EVENTO DE CARGA (START) ---
 document.addEventListener('DOMContentLoaded', () => {
+    // A. Renderizar Proyectos
     renderProjects();
     console.log(`✅ Se cargaron ${projects.length} proyectos correctamente.`);
+
+    // B. Lógica del Menú Hamburguesa
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show-menu');
+        });
+    }
+
+    // C. Cerrar menú al hacer clic en un link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('show-menu');
+        });
+    });
+
+    /* --- FORMULARIO DE CONTACTO (AJAX) --- */
+    const contactForm = document.getElementById('contact-form');
+    const formButton = document.getElementById('form-button');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // 1. Evitar que la página se recargue
+
+            // 2. Cambiar estado del botón (UX)
+            const originalButtonText = formButton.innerText;
+            formButton.innerText = 'Enviando...';
+            formButton.disabled = true;
+
+            // 3. Capturar los datos
+            const formData = new FormData(contactForm);
+
+            try {
+                // 4. Enviar a Formspree usando fetch
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                // 5. Manejar respuesta
+                if (response.ok) {
+                    formStatus.innerText = '¡Mensaje enviado! Te responderé pronto.';
+                    formStatus.classList.add('success');
+                    contactForm.reset(); // Limpiar campos
+                } else {
+                    formStatus.innerText = 'Hubo un error al enviar. Intenta nuevamente.';
+                    formStatus.classList.add('error');
+                }
+            } catch (error) {
+                formStatus.innerText = 'Error de conexión.';
+                formStatus.classList.add('error');
+            } finally {
+                // 6. Restaurar botón
+                formButton.innerText = originalButtonText;
+                formButton.disabled = false;
+                
+                // Ocultar mensaje después de 5 segundos
+                setTimeout(() => {
+                    formStatus.className = 'form-status'; // Quita success/error
+                }, 5000);
+            }
+        });
+    }
 });

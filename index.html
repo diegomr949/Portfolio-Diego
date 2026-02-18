@@ -23,7 +23,16 @@
         <nav class="nav container">
             <a href="#" class="nav__logo">Diego<span class="text-accent">.dev</span></a>
 
-            <ul class="nav__list">
+            <button class="nav__toggle" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <ul class="nav__list" id="nav-menu">
                 <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="#about" class="nav__link">Sobre mí</a></li>
                 <li class="nav__item"><a href="#projects" class="nav__link">Proyectos</a></li>
@@ -35,7 +44,7 @@
     <main class="main">
         <section id="home" class="hero section">
             <div class="hero__container container">
-                <h1 class="hero__title">
+                <h1 class="hero__title hidden">
                     Hola, soy Diego. <br>
                     Construyo <span class="hero__highlight">arquitecturas sólidas</span> para la web.
                 </h1>
@@ -78,24 +87,28 @@
                     </a>
                 </div>
 
-                <form class="contact-form">
+                <form id="contact-form" action="https://formspree.io/f/mlgwlnvp" method="POST" class="contact-form">
+
                     <div class="form-group">
                         <label for="name" class="form-label">Nombre</label>
-                        <input type="text" id="name" class="form-input" placeholder="Juan Pérez">
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Juan Pérez" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-input" placeholder="juan@empresa.com">
+                        <input type="email" id="email" name="email" class="form-input" placeholder="juan@empresa.com"
+                            required>
                     </div>
 
                     <div class="form-group">
                         <label for="message" class="form-label">Mensaje</label>
-                        <textarea id="message" class="form-input form-textarea"
-                            placeholder="Hola Diego, me gustaría..."></textarea>
+                        <textarea id="message" name="message" class="form-input form-textarea"
+                            placeholder="Hola Diego..." required></textarea>
                     </div>
 
-                    <button type="submit" class="button button--primary">Enviar Mensaje</button>
+                    <button type="submit" id="form-button" class="button button--primary">Enviar Mensaje</button>
+
+                    <p id="form-status" class="form-status"></p>
                 </form>
             </div>
         </section>
