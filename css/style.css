@@ -420,3 +420,85 @@ body {
     color: #ef4444; /* Rojo error */
     opacity: 1;
 }
+
+
+/* --- SECCIÓN SOBRE MÍ --- */
+.about__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    align-items: center; /* Centrado vertical */
+}
+
+/* Estilo de la imagen */
+.about__img-wrapper {
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto; /* Centrar si está en móvil */
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Para que la imagen respete el borde redondeado */
+    box-shadow: 10px 10px 0px var(--color-accent); /* Sombra sólida estilo "Pop" */
+    transition: transform 0.3s ease;
+}
+
+.about__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%); /* Efecto Blanco y Negro inicial */
+    transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+/* Efecto Hover en la foto */
+.about__img-wrapper:hover .about__img {
+    filter: grayscale(0%); /* A color al pasar el mouse */
+    transform: scale(1.05); /* Pequeño zoom */
+}
+
+.about__img-wrapper:hover {
+    transform: translate(-5px, -5px); /* Se mueve un poco arriba */
+    box-shadow: 15px 15px 0px var(--color-accent); /* La sombra crece */
+}
+
+/* Texto */
+.about__description {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.8;
+}
+
+.about__description strong {
+    color: var(--color-text); /* Destacar palabras clave */
+    font-weight: 600;
+}
+
+/* Lista de Habilidades */
+.about__skills {
+    margin-bottom: var(--spacing-lg);
+}
+
+.about__skills-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.skills-list li {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px; /* Forma de píldora */
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
