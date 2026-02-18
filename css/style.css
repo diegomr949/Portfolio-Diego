@@ -60,7 +60,6 @@ body {
 
 
 
-
 /* --- HEADER & NAV --- */
 .header {
     width: 100%;
@@ -501,4 +500,66 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+
+/* --- TEMA OSCURO --- */
+/* Cuando el body tenga el atributo data-theme="dark" */
+[data-theme="dark"] {
+    --color-bg: #0f172a; /* Azul noche profundo (Slate 900) */
+    --color-text: #f1f5f9; /* Blanco grisáceo (Slate 100) */
+    --color-text-light: #94a3b8; /* Gris azulado (Slate 400) */
+    --color-accent: #38bdf8; /* Celeste brillante (Sky 400) - Mejor contraste en oscuro */
+    --color-accent-hover: #0ea5e9;
+}
+
+/* Estilo del botón toggle */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    padding: 0.5rem;
+    display: flex; /* Para centrar el SVG */
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1); /* Efecto pop */
+    color: var(--color-accent);
+}
+
+/* Ajuste específico para las cards en modo oscuro */
+[data-theme="dark"] .card,
+[data-theme="dark"] .contact-form, 
+[data-theme="dark"] .nav__list {
+    background-color: #1e293b; /* Slate 800 - Un poco más claro que el fondo */
+    border-color: #334155; /* Borde sutil */
+    box-shadow: none; /* Quitamos sombras en dark mode (se ven raras) */
+}
+
+[data-theme="dark"] .header {
+    background-color: rgba(15, 23, 42, 0.9); /* Mismo azul oscuro del fondo, semi-transparente */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Borde muy sutil para separar */
+}
+
+/* Opcional: Asegurar que el menú en móvil también tenga el fondo correcto */
+[data-theme="dark"] .nav__list {
+    background-color: rgba(15, 23, 42, 0.95);
+}
+
+#theme-icon-sun {
+    display: none;
+}
+#theme-icon-moon {
+    display: block;
+}
+
+[data-theme="dark"] #theme-icon-sun {
+    display: block;
+}
+[data-theme="dark"] #theme-icon-moon {
+    display: none;
 }

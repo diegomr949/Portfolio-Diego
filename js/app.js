@@ -145,4 +145,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    /* --- DARK MODE LOGIC --- */
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('theme-icon-sun');
+    const iconMoon = document.getElementById('theme-icon-moon');
+    
+    // 1. Función para aplicar el tema
+    const applyTheme = (theme) => {
+        document.body.setAttribute('data-theme', theme);
+        
+        if (theme === 'dark') {
+            iconMoon.classList.add('hidden'); // Ocultar luna
+            iconSun.classList.remove('hidden'); // Mostrar sol
+        } else {
+            iconSun.classList.add('hidden'); // Ocultar sol
+            iconMoon.classList.remove('hidden'); // Mostrar luna
+        }
+    };
+
+    // 2. Verificar preferencia guardada o del sistema
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        applyTheme(savedTheme); // Usar lo guardado
+    } else if (systemPrefersDark) {
+        applyTheme('dark'); // Usar preferencia del sistema
+    }
+
+    // 3. Evento Click
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme); // Guardar en "base de datos" local
+        });
+    }
 });
