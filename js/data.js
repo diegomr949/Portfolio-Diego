@@ -3,7 +3,7 @@ export const projects = [
         title: "Simulador de Aranceles (CPCE)",
         description: "Aplicación web crítica desarrollada para el Consejo Profesional de Ciencias Económicas. Automatiza cálculos de legalización complejos, reduciendo errores manuales y agilizando la atención al matriculado.",
         tech: ["JavaScript", "Lógica de Negocio", "DOM Manipulation", "CSS3"],
-        githubLink: "#", // Si es privado, dejalo así o poné el link al repo si te dejan
+        githubLink: "#", 
         liveLink: "https://cpce-mendoza.github.io/calculadora-Arancel/"
     },
     {
@@ -18,14 +18,14 @@ export const projects = [
         description: "Sistema de gestión de contenido multimedia escalable. Arquitectura backend sólida utilizando Spring Boot, con persistencia de datos relacional (SQL) y manejo avanzado de excepciones.",
         tech: ["Java", "Spring Boot", "JPA / Hibernate", "MySQL", "API REST"],
         githubLink: "https://github.com/diegomr949/screenmatch",
-        liveLink: "#" // No tiene deploy frontend, es backend puro
+        liveLink: "#" 
     },
     {
         title: "Security Text Encoder",
         description: "Herramienta de criptografía ligera ejecutada en el cliente. Algoritmos personalizados de sustitución de caracteres con validación de inputs en tiempo real y diseño UI moderno.",
         tech: ["JavaScript ES6+", "HTML5 Semántico", "CSS Variables"],
         githubLink: "https://github.com/diegomr949/challenge-encriptador",
-        liveLink: "https://diegomr949.github.io/challenge-encriptador/" // Asumo que tenés GitHub Pages activo aquí
+        liveLink: "https://diegomr949.github.io/challenge-encriptador/" 
     },
     {
         title: "Star Wars Data Retrieval",

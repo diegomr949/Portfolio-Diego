@@ -1,12 +1,12 @@
 import { projects } from './data.js';
 
-// --- 1. SELECCIÓN DE ELEMENTOS DEL DOM ---
+// --- SELECCIÓN DE ELEMENTOS DEL DOM ---
 const projectsContainer = document.getElementById('projects-container');
 const navToggle = document.querySelector('.nav__toggle');
 const navMenu = document.querySelector('#nav-menu');
 const navLinks = document.querySelectorAll('.nav__link');
 
-// --- 2. CONFIGURACIÓN DE ANIMACIONES (SCROLL REVEAL) ---
+// --- CONFIGURACIÓN DE ANIMACIONES  ---
 const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -28,11 +28,11 @@ function initScrollAnimations() {
     elementsToAnimate.forEach((el) => observer.observe(el));
 }
 
-// --- 3. GENERADOR DE TARJETAS (HTML) ---
+// --- GENERADOR DE TARJETAS ---
 function createProjectCard(project) {
     const techTags = project.tech.map(tag => `<li>${tag}</li>`).join('');
 
-    // NOTA: Agregamos la clase 'hidden' aquí para que nazcan ocultas
+    
     return `
         <article class="card hidden">
             <div class="card__header">
@@ -59,7 +59,7 @@ function createProjectCard(project) {
     `;
 }
 
-// --- 4. RENDERIZADO PRINCIPAL ---
+// --- RENDERIZADO PRINCIPAL ---
 function renderProjects() {
     if (!projectsContainer) return;
 
@@ -70,49 +70,49 @@ function renderProjects() {
         projectsContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
 
-    // IMPORTANTE: Iniciamos la animación DESPUÉS de crear las tarjetas
+    // Iniciamos la animación DESPUÉS de crear las tarjetas
     initScrollAnimations();
 }
 
-// --- 5. EVENTO DE CARGA (START) ---
+// --- CARGA  ---
 document.addEventListener('DOMContentLoaded', () => {
-    // A. Renderizar Proyectos
+    // Renderizar Proyectos
     renderProjects();
     console.log(`✅ Se cargaron ${projects.length} proyectos correctamente.`);
 
-    // B. Lógica del Menú Hamburguesa
+    // Lógica del Menú Hamburguesa
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('show-menu');
         });
     }
 
-    // C. Cerrar menú al hacer clic en un link
+    // Cerrar menú al hacer clic en un link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('show-menu');
         });
     });
 
-    /* --- FORMULARIO DE CONTACTO (AJAX) --- */
+    /* --- FORM DE CONTACTO --- */
     const contactForm = document.getElementById('contact-form');
     const formButton = document.getElementById('form-button');
     const formStatus = document.getElementById('form-status');
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // 1. Evitar que la página se recargue
+            event.preventDefault(); // Evitar que la página se recargue
 
-            // 2. Cambiar estado del botón (UX)
+            // Cambiar estado del botón (UX)
             const originalButtonText = formButton.innerText;
             formButton.innerText = 'Enviando...';
             formButton.disabled = true;
 
-            // 3. Capturar los datos
+            // Capturar los datos
             const formData = new FormData(contactForm);
 
             try {
-                // 4. Enviar a Formspree usando fetch
+                // Enviar a Formspree usando fetch
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
@@ -121,11 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // 5. Manejar respuesta
+                // Manejar respuesta
                 if (response.ok) {
                     formStatus.innerText = '¡Mensaje enviado! Te responderé pronto.';
                     formStatus.classList.add('success');
-                    contactForm.reset(); // Limpiar campos
+                    contactForm.reset();
                 } else {
                     formStatus.innerText = 'Hubo un error al enviar. Intenta nuevamente.';
                     formStatus.classList.add('error');
@@ -134,23 +134,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 formStatus.innerText = 'Error de conexión.';
                 formStatus.classList.add('error');
             } finally {
-                // 6. Restaurar botón
+                // Restaurar botón
                 formButton.innerText = originalButtonText;
                 formButton.disabled = false;
                 
-                // Ocultar mensaje después de 5 segundos
+                
                 setTimeout(() => {
-                    formStatus.className = 'form-status'; // Quita success/error
+                    formStatus.className = 'form-status'; 
                 }, 5000);
             }
         });
     }
-    /* --- DARK MODE LOGIC --- */
+    /* --- Dark mode --- */
     const themeToggle = document.getElementById('theme-toggle');
     const iconSun = document.getElementById('theme-icon-sun');
     const iconMoon = document.getElementById('theme-icon-moon');
     
-    // 1. Función para aplicar el tema
+    // Función para aplicar el tema
     const applyTheme = (theme) => {
         document.body.setAttribute('data-theme', theme);
         
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 2. Verificar preferencia guardada o del sistema
+    // Verificar preferencia guardada o del sistema
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme('dark'); // Usar preferencia del sistema
     }
 
-    // 3. Evento Click
+    // Click
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.body.getAttribute('data-theme');
